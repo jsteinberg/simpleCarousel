@@ -22,7 +22,7 @@ jQuery simpleCarousel Plugin
     SimpleCarousel = function(carousel) {
       // elements
       this.carousel = $(carousel);
-      this.wrapper = $('<div class="wrapper">');
+      this.wrapper = $('<div class="simpleCarouselWrapper">');
       this.list = this.carousel.find('> ul');
       this.items = this.list.children();
       // generate for this plugin
