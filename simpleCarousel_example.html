@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+  <head>
+    <title>simpleCarousel</title>
+    <style>
+      .simpleCarousel {
+        height:480px;
+        padding:20px;        
+        position:relative;
+        width:640px;
+      }
+      
+      .simpleCarousel ul {
+        margin:0;
+        padding:0;
+      }
+      
+      .simpleCarousel ul > li {
+        background:red;
+        color:#fff;
+        font-size:5em;
+        list-style-type:none;
+        margin:0;
+        padding:0;
+        text-align:center;
+      }
+      .simpleCarousel ul > li+li {
+        background:green;
+      }
+      .simpleCarousel ul > li+li+li {
+        background:blue;
+      }
+      .simpleCarousel ul > li+li+li+li {
+        background:magenta;
+      }
+      .simpleCarousel ul > li+li+li+li+li {
+        background:cyan;
+      }
+      
+      .simpleCarousel .simpleCarouselNext {
+        bottom:-10px;
+        position:absolute;
+        right:20px;
+      }
+      .simpleCarousel .simpleCarouselPrev {
+        bottom:-10px;
+        left:20px;
+        position:absolute;
+      }
+      
+    </style>
+  </head>
+  <body id="www-frontlinehomeownersinsurance-com">
+    
+    <div class="simpleCarousel">
+      <ul>
+        <li>one</li>
+        <li>two</li>
+        <li>three</li>
+        <li>four</li>
+        <li>five</li>
+      </ul>
+    </div>
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.simpleCarousel.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        // Options (defaults):
+        // width:640,
+        // height:480,
+        // showItems:1,
+        // animationSpeed:250,
+        // loop:false
+        $('.simpleCarousel').simpleCarousel();
+      });
+    </script>
+  </body>
+</html>

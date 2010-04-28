@@ -1,0 +1,12 @@
+simpleCarousel - carousel jQuery plugin
+
+Requirements:
+1. A <div> with a selector to instantiate
+2. A nested <ul> inside the <div>
+
+Options:
+1. width - set a width for the carousel and it's items. (default: 640)
+2. height - set a height for the carousel and it's items. (default: 480)
+3. showItems - sets how many items to display at once and how many to scroll through at a time. (default: 1)
+4. animationSpeed - sets scrolling speed. (default: 250)
+5. loop - set to either loop through or stop at the beginning or end of a carousel. This will also disable next/previous buttons if set to false. (default: false)
