@@ -130,8 +130,8 @@ jQuery simpleCarousel Plugin
   
   // Default values
   $.fn.simpleCarousel.defaults = {
-    width:640,
-    height:480,
+    width:'auto',
+    height:'auto',
     showItems:1,
     animationSpeed:250,
     loop:false
