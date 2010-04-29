@@ -9,129 +9,132 @@ jQuery simpleCarousel Plugin
   * Licence: dual, MIT/GPLv2
   * requires jQuery1.4.2
 */
-(function(){
-  jQuery.fn.simpleCarousel = function(options) {
-    var settings = $.extend({}, { 
-      width:640,
-      height:480,
-      showItems:1,
-      animationSpeed:250,
-      loop:false
-    }, options);
+(function($){
+  $.fn.simpleCarousel = function(options) {
+    $settings = $.extend({}, $.fn.simpleCarousel.defaults, options);  
     
-    SimpleCarousel = function(carousel) {
-      // elements
-      this.carousel = $(carousel);
-      this.wrapper = $('<div class="simpleCarouselWrapper">');
-      this.list = this.carousel.find('> ul');
-      this.items = this.list.children();
-      // generate for this plugin
-      this.nextButton = $('<a href="#next" class="simpleCarouselNext">next</a>');
-      this.prevButton = $('<a href="#prev" class="simpleCarouselPrev">prev</a>');
-      // sizes
-      this.currentPage = 1;
-      this.pages = Math.ceil(this.items.length/settings.showItems);
-    };
-    
-    SimpleCarousel.prototype = {
-      setup: function() {
-        this.nextButton.appendTo(this.carousel);
-        this.prevButton.appendTo(this.carousel);
-        
-        if(settings.loop == false) {
-          this.setControls(this.currentPage);
-        }
-        
-        this.wrapper
-          .css({
-            'overflow':'hidden',
-            height:settings.height,
-            width:settings.width*settings.showItems
-          })
-          .appendTo(this.carousel);
-          
-        this.list
-          .css({
-            height:settings.height,
-            width:settings.width*this.items.length
-          })
-          .appendTo(this.wrapper);
-        
-        this.items
-          .css({
-            'float':'left',
-            height:settings.height,
-            width:settings.width
-          });
-      },
-      
-      bindEvents: function() {
-        var that = this;
-        
-        this.nextButton.click(function() {
-          that.controlContext(this, that.currentPage+1);
-          return false;
-        });
-        this.prevButton.click(function() {
-          that.controlContext(this, that.currentPage-1);
-          return false;
-        });
-      },
-      
-      controlContext: function(control, page) {
-        if(!$(control).hasClass('disabled')) {
-          if(!$(control).hasClass('active')) {
-            $(control).addClass('active');
-            this.gotoPage(control, page);
-          }
-        }
-      },
-      
-      setControls: function(page) {        
-        if(page == this.pages) {
-          this.nextButton.addClass('disabled');
-          this.prevButton.removeClass('disabled');
-        } else if(page == 1) {
-          this.nextButton.removeClass('disabled');
-          this.prevButton.addClass('disabled');         
-        } else {
-          this.nextButton.removeClass('disabled');
-          this.prevButton.removeClass('disabled');
-        }
-      },
-      
-      gotoPage: function(control, page) {   
-        if(settings.loop == true) {
-          if(page > this.pages) {
-            page = 1;
-          } else if(page == 0) {
-            page = this.pages;
-          }
-        } else {
-          this.setControls(page);
-        }
-           
-        var dir = page < this.currentPage ? -1 : 1,
-            n = Math.abs(this.currentPage - page),
-            left = settings.width*dir*settings.showItems*n;
-
-        var that = this;
-        this.wrapper.filter(':not(:animated)').animate({
-          scrollLeft:'+='+left
-          }, 
-          settings.animationSpeed, 
-          function() {
-            that.currentPage = page;
-            $(control).removeClass('active');
-        });
-      }
-    };
-    
-    // jQuery Distribution
     return this.each(function() {
-      var carousel = new SimpleCarousel(this);
-      carousel.setup();
-      carousel.bindEvents();
+      $this = $(this);
+      $list = $this.find('> ul');
+      $items = $list.children();
+      // Generated elements for the carousel
+      $wrapper = $('<div class="simpleCarouselWrapper">');
+      $nextButton = $('<a href="#next" class="simpleCarouselNext">next</a>');
+      $prevButton = $('<a href="#prev" class="simpleCarouselPrev">prev</a>');
+      // sizes
+      $currentPage = 1;
+      $pages = Math.ceil($items.length/$settings.showItems);
+
+      setup();
+      bindEvents();
     });
+  };
+  
+  // Private functions
+  function setup() {
+    $nextButton.appendTo($this);
+    $prevButton.appendTo($this);
+    
+    if($settings.loop == false) {
+      setControls($currentPage);
+    }
+    
+    $wrapper
+      .css({
+        'overflow':'hidden',
+        height:$settings.height,
+        width:$settings.width*$settings.showItems
+      })
+      .appendTo($this);
+      
+    $list
+      .css({
+        height:$settings.height,
+        width:$settings.width*$items.length
+      })
+      .appendTo($wrapper);
+    
+    $items
+      .css({
+        'float':'left',
+        height:$settings.height,
+        width:$settings.width
+      });
+  };
+  
+  function bindEvents($settings) {
+    $nextButton.click(function() {
+      controlContext(this, $currentPage+1);
+      return false;
+    });
+    $prevButton.click(function() {
+      controlContext(this, $currentPage-1);
+      return false;
+    });
+  };
+  
+  function controlContext(control, page) {
+    if(!$(control).hasClass('disabled')) {
+      if(!$(control).hasClass('active')) {
+        $(control).addClass('active');
+        gotoPage(control, page);
+      }
+    }
+  };
+  
+  function setControls(page) {        
+    if(page == $pages) {
+      $nextButton.addClass('disabled');
+      $prevButton.removeClass('disabled');
+    } else if(page == 1) {
+      $nextButton.removeClass('disabled');
+      $prevButton.addClass('disabled');         
+    } else {
+      $nextButton.removeClass('disabled');
+      $prevButton.removeClass('disabled');
+    }
+  };
+  
+  function gotoPage(control, page) {
+    if($settings.loop == true) {
+      if(page > $pages) {
+        page = 1;
+      } else if(page == 0) {
+        page = $pages;
+      }
+    } else {
+      setControls(page);
+    }
+       
+    var dir = page < $currentPage ? -1 : 1,
+        n = Math.abs($currentPage - page),
+        left = $settings.width*dir*$settings.showItems*n;
+
+    $wrapper.filter(':not(:animated)').animate({
+      scrollLeft:'+='+left
+      }, 
+      $settings.animationSpeed, 
+      function() {
+        $currentPage = page;
+        $(control).removeClass('active');
+    });
+  };
+  
+  // Public functions
+  $.fn.simpleCarousel.getHeight = function() {
+    console.log($settings.height);
+    return $settings.height;
+  };
+  $.fn.simpleCarousel.getWidth = function() {
+    return $settings.width;
+  };
+  
+  // Default values
+  $.fn.simpleCarousel.defaults = {
+    width:640,
+    height:480,
+    showItems:1,
+    animationSpeed:250,
+    loop:false
   };
 })(jQuery);
