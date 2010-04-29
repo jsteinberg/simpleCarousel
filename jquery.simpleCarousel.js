@@ -11,7 +11,7 @@ jQuery simpleCarousel Plugin
 */
 (function($){
   $.fn.simpleCarousel = function(options) {
-    $settings = $.extend({}, $.fn.simpleCarousel.defaults, options);  
+    var settings = $.extend({}, $.fn.simpleCarousel.defaults, options);  
     
     return this.each(function() {
       $this = $(this);
@@ -21,9 +21,15 @@ jQuery simpleCarousel Plugin
       $wrapper = $('<div class="simpleCarouselWrapper">');
       $nextButton = $('<a href="#next" class="simpleCarouselNext">next</a>');
       $prevButton = $('<a href="#prev" class="simpleCarouselPrev">prev</a>');
+      // settings
+      $width = settings.width;
+      $height = settings.height;
+      $showItems = settings.showItems;
+      $animationSpeed = settings.animationSpeed;
+      $loop = settings.loop;
       // sizes
       $currentPage = 1;
-      $pages = Math.ceil($items.length/$settings.showItems);
+      $pages = Math.ceil($items.length/$showItems);
 
       setup();
       bindEvents();
@@ -35,34 +41,33 @@ jQuery simpleCarousel Plugin
     $nextButton.appendTo($this);
     $prevButton.appendTo($this);
     
-    if($settings.loop == false) {
+    if($loop == false) {
       setControls($currentPage);
     }
-    
     $wrapper
       .css({
         'overflow':'hidden',
-        height:$settings.height,
-        width:$settings.width*$settings.showItems
+        height:$height,
+        width:$width*$showItems
       })
       .appendTo($this);
       
     $list
       .css({
-        height:$settings.height,
-        width:$settings.width*$items.length
+        height:$height,
+        width:$width*$items.length
       })
       .appendTo($wrapper);
     
     $items
       .css({
         'float':'left',
-        height:$settings.height,
-        width:$settings.width
+        height:$height,
+        width:$width
       });
   };
   
-  function bindEvents($settings) {
+  function bindEvents() {
     $nextButton.click(function() {
       controlContext(this, $currentPage+1);
       return false;
@@ -96,7 +101,7 @@ jQuery simpleCarousel Plugin
   };
   
   function gotoPage(control, page) {
-    if($settings.loop == true) {
+    if($loop == true) {
       if(page > $pages) {
         page = 1;
       } else if(page == 0) {
@@ -108,12 +113,12 @@ jQuery simpleCarousel Plugin
        
     var dir = page < $currentPage ? -1 : 1,
         n = Math.abs($currentPage - page),
-        left = $settings.width*dir*$settings.showItems*n;
+        left = $width*dir*$showItems*n;
 
     $wrapper.filter(':not(:animated)').animate({
       scrollLeft:'+='+left
       }, 
-      $settings.animationSpeed, 
+      $animationSpeed, 
       function() {
         $currentPage = page;
         $(control).removeClass('active');
@@ -122,10 +127,10 @@ jQuery simpleCarousel Plugin
   
   // Public functions
   $.fn.simpleCarousel.getHeight = function() {
-    return $settings.height;
+    return $height;
   };
   $.fn.simpleCarousel.getWidth = function() {
-    return $settings.width;
+    return $width;
   };
   
   // Default values
