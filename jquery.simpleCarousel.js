@@ -122,7 +122,6 @@ jQuery simpleCarousel Plugin
   
   // Public functions
   $.fn.simpleCarousel.getHeight = function() {
-    console.log($settings.height);
     return $settings.height;
   };
   $.fn.simpleCarousel.getWidth = function() {
