@@ -37,8 +37,8 @@ jQuery simpleCarousel Plugin
       $items = $list.children();
       // Generated elements for the carousel
       $wrapper = $('<div class="simpleCarouselWrapper">');
-      $nextControl = $('<a href="#next" class="simpleCarouselNext">next</a>');
-      $prevControl = $('<a href="#prev" class="simpleCarouselPrev">prev</a>');
+      $nextControl = $('<a href="#" class="simpleCarouselNext">next</a>');
+      $prevControl = $('<a href="#" class="simpleCarouselPrev">prev</a>');
       // settings
       $width = settings.width;
       $height = settings.height;
@@ -84,6 +84,8 @@ jQuery simpleCarousel Plugin
         height:$height,
         width:$width
       });
+      
+    updateControlTitle($currentPage);
   };
   
   function bindEvents() {
@@ -119,6 +121,22 @@ jQuery simpleCarousel Plugin
     }
   };
   
+  function updateControlTitle(currentPage) {    
+    if(currentPage == $pages) {
+      var nextPage = 1;
+      var prevPage = $currentPage-1;
+    } else if(currentPage == 1) {
+      var nextPage = $currentPage+1;
+      var prevPage = $pages;
+    } else {
+      var nextPage = currentPage+1;
+      var prevPage = currentPage-1;
+    }
+    
+    $nextControl.attr('href', nextPage);
+    $prevControl.attr('href', prevPage);
+  };
+  
   function gotoPage(control, page) {
     if($loop == true) {
       if(page > $pages) {
@@ -134,6 +152,7 @@ jQuery simpleCarousel Plugin
         n = Math.abs($currentPage - page),
         left = $width*dir*$showItems*n;
 
+    var that = this;
     $wrapper.filter(':not(:animated)').animate({
       scrollLeft:'+='+left
       }, 
@@ -142,6 +161,7 @@ jQuery simpleCarousel Plugin
         $currentPage = page;
         if(control != 'externalPager') {
           $(control).removeClass('active');
+          updateControlTitle($currentPage);
         }
     });
   };
