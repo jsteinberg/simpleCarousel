@@ -40,7 +40,8 @@ jQuery simpleCarousel Plugin
   function setup() {
     $nextButton.appendTo($this);
     $prevButton.appendTo($this);
-    
+    $wrapper.scrollLeft(0);
+
     if($loop == false) {
       setControls($currentPage);
     }
@@ -87,7 +88,7 @@ jQuery simpleCarousel Plugin
     }
   };
   
-  function setControls(page) {        
+  function setControls(page) {
     if(page == $pages) {
       $nextButton.addClass('disabled');
       $prevButton.removeClass('disabled');
@@ -121,11 +122,17 @@ jQuery simpleCarousel Plugin
       $animationSpeed, 
       function() {
         $currentPage = page;
-        $(control).removeClass('active');
+        $(control).each(function() { 
+          $(this).removeClass('active');
+        });
     });
   };
   
   // Public functions
+  $.fn.simpleCarousel.externalPager = function(page) {
+    var control = [$nextButton, $prevButton];
+    gotoPage({}, page);
+  };
   $.fn.simpleCarousel.getHeight = function() {
     return $height;
   };
