@@ -30,7 +30,6 @@ jQuery simpleCarousel Plugin
       // sizes
       $currentPage = 1;
       $pages = Math.ceil($items.length/$showItems);
-      console.log($list);
       setup();
       bindEvents();
     });
