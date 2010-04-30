@@ -122,22 +122,27 @@ jQuery simpleCarousel Plugin
       $animationSpeed, 
       function() {
         $currentPage = page;
-        $(control).each(function() { 
-          $(this).removeClass('active');
-        });
+        if(control != 'externalPager') {
+          $(control).removeClass('active');
+        }
     });
   };
   
   // Public functions
   $.fn.simpleCarousel.externalPager = function(page) {
-    var control = [$nextButton, $prevButton];
-    gotoPage({}, page);
+    gotoPage('externalPager', page);
   };
   $.fn.simpleCarousel.getHeight = function() {
     return $height;
   };
   $.fn.simpleCarousel.getWidth = function() {
     return $width;
+  };
+  $.fn.simpleCarousel.getNextButton = function() {
+    return $nextButton;
+  };
+  $.fn.simpleCarousel.getPrevButton = function() {
+    return $prevButton;
   };
   
   // Default values
