@@ -15,7 +15,7 @@ jQuery simpleCarousel Plugin
     
     return this.each(function() {
       $this = $(this);
-      $list = $this.find('> ul');
+      $list = $this.children();
       $items = $list.children();
       // Generated elements for the carousel
       $wrapper = $('<div class="simpleCarouselWrapper">');
@@ -30,7 +30,7 @@ jQuery simpleCarousel Plugin
       // sizes
       $currentPage = 1;
       $pages = Math.ceil($items.length/$showItems);
-
+      console.log($list);
       setup();
       bindEvents();
     });
