@@ -19,8 +19,8 @@ jQuery simpleCarousel Plugin
       $items = $list.children();
       // Generated elements for the carousel
       $wrapper = $('<div class="simpleCarouselWrapper">');
-      $nextButton = $('<a href="#next" class="simpleCarouselNext">next</a>');
-      $prevButton = $('<a href="#prev" class="simpleCarouselPrev">prev</a>');
+      $nextControl = $('<a href="#next" class="simpleCarouselNext">next</a>');
+      $prevControl = $('<a href="#prev" class="simpleCarouselPrev">prev</a>');
       // settings
       $width = settings.width;
       $height = settings.height;
@@ -38,8 +38,8 @@ jQuery simpleCarousel Plugin
   
   // Private functions
   function setup() {
-    $nextButton.appendTo($this);
-    $prevButton.appendTo($this);
+    $nextControl.appendTo($this);
+    $prevControl.appendTo($this);
     $wrapper.scrollLeft(0);
 
     if($loop == false) {
@@ -62,6 +62,7 @@ jQuery simpleCarousel Plugin
     
     $items
       .css({
+        'display':'block',
         'float':'left',
         height:$height,
         width:$width
@@ -69,11 +70,11 @@ jQuery simpleCarousel Plugin
   };
   
   function bindEvents() {
-    $nextButton.click(function() {
+    $nextControl.click(function() {
       controlContext(this, $currentPage+1);
       return false;
     });
-    $prevButton.click(function() {
+    $prevControl.click(function() {
       controlContext(this, $currentPage-1);
       return false;
     });
@@ -90,14 +91,14 @@ jQuery simpleCarousel Plugin
   
   function setControls(page) {
     if(page == $pages) {
-      $nextButton.addClass('disabled');
-      $prevButton.removeClass('disabled');
+      $nextControl.addClass('disabled');
+      $prevControl.removeClass('disabled');
     } else if(page == 1) {
-      $nextButton.removeClass('disabled');
-      $prevButton.addClass('disabled');         
+      $nextControl.removeClass('disabled');
+      $prevControl.addClass('disabled');         
     } else {
-      $nextButton.removeClass('disabled');
-      $prevButton.removeClass('disabled');
+      $nextControl.removeClass('disabled');
+      $prevControl.removeClass('disabled');
     }
   };
   
@@ -132,17 +133,11 @@ jQuery simpleCarousel Plugin
   $.fn.simpleCarousel.externalPager = function(page) {
     gotoPage('externalPager', page);
   };
-  $.fn.simpleCarousel.getHeight = function() {
-    return $height;
+  $.fn.simpleCarousel.getDimensions = function() {
+    return {width: $width, height: $height};
   };
-  $.fn.simpleCarousel.getWidth = function() {
-    return $width;
-  };
-  $.fn.simpleCarousel.getNextButton = function() {
-    return $nextButton;
-  };
-  $.fn.simpleCarousel.getPrevButton = function() {
-    return $prevButton;
+  $.fn.simpleCarousel.getControls = function() {
+    return {next: $nextControl, prev: $prevControl};
   };
   
   // Default values
