@@ -159,9 +159,9 @@ jQuery simpleCarousel Plugin
       $animationSpeed, 
       function() {
         $currentPage = page;
+        updateControlTitle($currentPage);
         if(control != 'externalPager') {
           $(control).removeClass('active');
-          updateControlTitle($currentPage);
         }
     });
   };
