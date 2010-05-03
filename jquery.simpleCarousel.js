@@ -128,8 +128,8 @@ jQuery simpleCarousel Plugin
           var prevPage = currentPage-1;
         }
 
-        $nextControl.attr('href', '#' + nextPage);
-        $prevControl.attr('href', '#' + prevPage);
+        $nextControl.attr('href', nextPage);
+        $prevControl.attr('href', prevPage);
       };
 
       function gotoPage(control, page) {
