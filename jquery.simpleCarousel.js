@@ -170,7 +170,7 @@ jQuery simpleCarousel Plugin
         gotoPage('externalPager', page);
       };
       $.fn.simpleCarousel.getDimensions = function() {
-        return {width: $width, height: $height};
+        return {width: settings.width, height: settings.height};
       };
       $.fn.simpleCarousel.getControls = function() {
         return {next: $nextControl, prev: $prevControl};
