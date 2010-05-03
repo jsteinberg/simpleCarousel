@@ -46,9 +46,7 @@ jQuery simpleCarousel Plugin
       ////////////
       // Set up //
       ////////////
-      $nextControl
-        .appendTo($this);
-      $prevControl
+      $([$wrapper, $nextControl, $prevControl])
         .appendTo($this);
       $wrapper
         .css({
@@ -56,20 +54,20 @@ jQuery simpleCarousel Plugin
           height:settings.height,
           width:settings.width*settings.showItems
         })
-        .appendTo($this);
       $list
         .css({
           height:settings.height,
           width:settings.width*$items.length
         })
         .appendTo($wrapper);
-      $items
-        .css({
+      $items.each(function() {
+        $(this).css({
           'display':'block',
           'float':'left',
           height:settings.height,
           width:settings.width
         });
+      });
 
       ////////////////////
       // Function calls //
@@ -130,8 +128,8 @@ jQuery simpleCarousel Plugin
           var prevPage = currentPage-1;
         }
 
-        $nextControl.attr('href', nextPage);
-        $prevControl.attr('href', prevPage);
+        $nextControl.attr('href', '#' + nextPage);
+        $prevControl.attr('href', '#' + prevPage);
       };
 
       function gotoPage(control, page) {
