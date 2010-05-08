@@ -54,6 +54,7 @@ jQuery simpleCarousel Plugin
           height:settings.height,
           width:settings.width*settings.showItems
         })
+        .scrollLeft(0);
       $list
         .css({
           height:settings.height,
@@ -72,7 +73,7 @@ jQuery simpleCarousel Plugin
       ////////////////////
       // Function calls //
       ////////////////////
-      updateControlTitle($currentPage);
+      updateControlHref($currentPage);
       // Loop option
       if(settings.loop == false) {
         setControls($currentPage);
@@ -116,7 +117,7 @@ jQuery simpleCarousel Plugin
         }
       };
 
-      function updateControlTitle(currentPage) {    
+      function updateControlHref(currentPage) { 
         if(currentPage == $pages) {
           var nextPage = 1;
           var prevPage = $currentPage-1;
@@ -128,8 +129,12 @@ jQuery simpleCarousel Plugin
           var prevPage = currentPage-1;
         }
 
-        $nextControl.attr('href', nextPage);
-        $prevControl.attr('href', prevPage);
+        if(!$nextControl.hasClass('disabled')) {
+          $nextControl.attr('href', nextPage);
+        }
+        if(!$prevControl.hasClass('disabled')) {
+          $prevControl.attr('href', prevPage);
+        }
       };
 
       function gotoPage(control, page) {
@@ -154,7 +159,7 @@ jQuery simpleCarousel Plugin
           settings.animationSpeed, 
           function() {
             $currentPage = page;
-            updateControlTitle($currentPage);
+            updateControlHref($currentPage);
             if(control != 'externalPager') {
               $(control).removeClass('active');
             }
