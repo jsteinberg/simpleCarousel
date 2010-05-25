@@ -3,33 +3,19 @@
   <head>
     <title>simpleCarousel</title>
     <style>
-      .simpleCarousel.one {
-        height:480px;
-        padding:20px;        
+    
+      .simpleCarouselContainer {   
+        margin:20px;
+        padding:20px;
         position:relative;
-        width:640px;
       }
       
-      .simpleCarousel.two {
-        height:200px;
-        padding:20px;        
-        position:relative;
-        width:642px;
-      }
-      
-      .simpleCarousel.three {
-        height:100px;
-        padding:20px;        
-        position:relative;
-        width:640px;
-      }
-      
-      .simpleCarousel ul {
+      ul.simpleCarousel {
         margin:0;
         padding:0;
       }
       
-      .simpleCarousel ul > li {
+      ul.simpleCarousel > li {
         background:red;
         color:#fff;
         font-size:2em;
@@ -38,40 +24,40 @@
         padding:0;
         text-align:center;
       }
-      .simpleCarousel ul > li+li {
+      ul.simpleCarousel > li+li {
         background:green;
       }
-      .simpleCarousel ul > li+li+li {
+      ul.simpleCarousel > li+li+li {
         background:blue;
       }
-      .simpleCarousel ul > li+li+li+li {
+      ul.simpleCarousel > li+li+li+li {
         background:magenta;
       }
-      .simpleCarousel ul > li+li+li+li+li {
+      ul.simpleCarousel > li+li+li+li+li {
         background:cyan;
       }
-      .simpleCarousel ul > li+li+li+li+li+li {
+      ul.simpleCarousel > li+li+li+li+li+li {
         background:yellow;
       }
-      .simpleCarousel ul > li+li+li+li+li+li+li {
+      ul.simpleCarousel > li+li+li+li+li+li+li {
         background:brown;
       }
-      .simpleCarousel ul > li+li+li+li+li+li+li+li {
+      ul.simpleCarousel > li+li+li+li+li+li+li+li {
         background:orange;
       }
-      .simpleCarousel ul > li+li+li+li+li+li+li+li+li {
+      ul.simpleCarousel > li+li+li+li+li+li+li+li+li {
         background:purple;
       }
-      .simpleCarousel ul > li+li+li+li+li+li+li+li+li+li {
+      ul.simpleCarousel > li+li+li+li+li+li+li+li+li+li {
         background:black;
       }
       
-      .simpleCarousel .simpleCarouselNext {
+      .simpleCarouselContainer .simpleCarouselNext {
         bottom:-10px;
         position:absolute;
         right:20px;
       }
-      .simpleCarousel .simpleCarouselPrev {
+      .simpleCarouselContainer .simpleCarouselPrev {
         bottom:-10px;
         left:20px;
         position:absolute;
@@ -81,53 +67,46 @@
   </head>
   <body>
     
-    <div class="simpleCarousel one">
-      <ul>
-        <li>one</li>
-        <li>two</li>
-        <li>three</li>
-        <li>four</li>
-        <li>five</li>
-        <li>six</li>
-        <li>seven</li>
-        <li>eight</li>
-        <li>nine</li>
-        <li>ten</li>
-      </ul>
-    </div>
+    <ul class="simpleCarousel one">
+      <li>one</li>
+      <li>two</li>
+      <li>three</li>
+      <li>four</li>
+      <li>five</li>
+      <li>six</li>
+      <li>seven</li>
+      <li>eight</li>
+      <li>nine</li>
+      <li>ten</li>
+    </ul>
     
-    <div class="simpleCarousel two">
-      <ul>
-        <li>one</li>
-        <li>two</li>
-        <li>three</li>
-        <li>four</li>
-        <li>five</li>
-        <li>six</li>
-        <li>seven</li>
-        <li>eight</li>
-        <li>nine</li>
-        <li>ten</li>
-      </ul>
-    </div>
+    <ul class="simpleCarousel two">
+      <li>one</li>
+      <li>two</li>
+      <li>three</li>
+      <li>four</li>
+      <li>five</li>
+      <li>six</li>
+      <li>seven</li>
+      <li>eight</li>
+      <li>nine</li>
+      <li>ten</li>
+    </ul>
     
-    <div class="simpleCarousel three">
-      <ul>
-        <li>one</li>
-        <li>two</li>
-        <li>three</li>
-        <li>four</li>
-        <li>five</li>
-        <li>six</li>
-        <li>seven</li>
-        <li>eight</li>
-        <li>nine</li>
-        <li>ten</li>
-      </ul>
-    </div>
+    <ul class="simpleCarousel three">
+      <li>one</li>
+      <li>two</li>
+      <li>three</li>
+      <li>four</li>
+      <li>five</li>
+      <li>six</li>
+      <li>seven</li>
+      <li>eight</li>
+      <li>nine</li>
+      <li>ten</li>
+    </ul>
     
-    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
-    <script type="text/javascript" src="../jquery/jquery-1.4.2.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="jquery.simpleCarousel.js"></script>
     <script type="text/javascript">
       $(function() {
@@ -140,6 +119,7 @@
         $('.simpleCarousel.one').simpleCarousel({
           width:640,
           height:480,
+          showItems:1,
           loop:true
         });
         

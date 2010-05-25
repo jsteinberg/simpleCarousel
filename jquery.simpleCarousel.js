@@ -31,12 +31,12 @@ jQuery simpleCarousel Plugin
   $.fn.simpleCarousel = function(options) {
     var settings = $.extend({}, $.fn.simpleCarousel.defaults, options);
     
-    return this.each(function() {
-      var $this = $(this),
-          $list = $this.children(),
+    return this.each(function(index) {
+      var $list = $(this),
           $items = $list.children();
           // Generated elements for the carousel
-      var $wrapper = $('<div class="simpleCarouselWrapper">'),
+      var $container = $('<div class="simpleCarouselContainer">'),
+          $wrapper = $('<div class="simpleCarouselWrapper">'),
           $nextControl = $('<a href="#" class="simpleCarouselNext">next</a>'),
           $prevControl = $('<a href="#" class="simpleCarouselPrev">prev</a>');
           // sizes
@@ -46,8 +46,16 @@ jQuery simpleCarousel Plugin
       ////////////
       // Set up //
       ////////////
+      $container
+        .css({
+          height:settings.height,
+          width:settings.width*settings.showItems
+        })
+        .addClass(settings.containerClass);
+      $list.replaceWith($container);
+      
       $([$wrapper, $nextControl, $prevControl])
-        .appendTo($this);
+        .appendTo($container);
       $wrapper
         .css({
           'overflow':'hidden',
@@ -118,15 +126,17 @@ jQuery simpleCarousel Plugin
       };
 
       function updateControlHref(currentPage) { 
+        var nextPage,
+            prevPage;
         if(currentPage == $pages) {
-          var nextPage = 1;
-          var prevPage = $currentPage-1;
+          nextPage = 1;
+          prevPage = $currentPage-1;
         } else if(currentPage == 1) {
-          var nextPage = $currentPage+1;
-          var prevPage = $pages;
+          nextPage = $currentPage+1;
+          prevPage = $pages;
         } else {
-          var nextPage = currentPage+1;
-          var prevPage = currentPage-1;
+          nextPage = currentPage+1;
+          prevPage = currentPage-1;
         }
 
         if(!$nextControl.hasClass('disabled')) {
