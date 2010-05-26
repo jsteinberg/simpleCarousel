@@ -51,7 +51,7 @@ jQuery simpleCarousel Plugin
           height:settings.height,
           width:settings.width*settings.showItems
         })
-        .addClass(settings.containerClass);
+        .addClass(settings.customClass);
       $list.replaceWith($container);
       
       $([$wrapper, $nextControl, $prevControl])
@@ -199,6 +199,7 @@ jQuery simpleCarousel Plugin
     height:'auto',
     showItems:1,
     animationSpeed:250,
-    loop:false
+    loop:false,
+    customClass:'simpleCarousel'
   };
 })(jQuery);
