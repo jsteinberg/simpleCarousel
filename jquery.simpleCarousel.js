@@ -54,8 +54,10 @@ jQuery simpleCarousel Plugin
         .addClass(settings.customClass);
       $list.replaceWith($container);
       
-      $([$wrapper, $nextControl, $prevControl])
-        .appendTo($container);
+      $wrapper.appendTo($container);
+      $nextControl.appendTo($container);
+      $prevControl.appendTo($container);
+      
       $wrapper
         .css({
           'overflow':'hidden',

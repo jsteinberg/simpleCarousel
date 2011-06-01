@@ -67,7 +67,7 @@
   </head>
   <body>
     
-    <ul class="simpleCarousel one">
+    <ul class="one">
       <li>one</li>
       <li>two</li>
       <li>three</li>
@@ -80,7 +80,7 @@
       <li>ten</li>
     </ul>
     
-    <ul class="simpleCarousel two">
+    <ul class="two">
       <li>one</li>
       <li>two</li>
       <li>three</li>
@@ -93,7 +93,7 @@
       <li>ten</li>
     </ul>
     
-    <ul class="simpleCarousel three">
+    <ul class="three">
       <li>one</li>
       <li>two</li>
       <li>three</li>
@@ -106,7 +106,7 @@
       <li>ten</li>
     </ul>
     
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="../jquery/jquery-1.4.2.js"></script>
     <script type="text/javascript" src="jquery.simpleCarousel.js"></script>
     <script type="text/javascript">
       $(function() {
@@ -116,22 +116,22 @@
         // showItems:1,
         // animationSpeed:250,
         // loop:false
-        $('.simpleCarousel.one').simpleCarousel({
-          width:100,
-          height:600,
-          showItems:4,
+        $('.one').simpleCarousel({
+          width:640,
+          height:480,
+          showItems:1,
           loop:true,
           customClass:'carousel_one'
         });
         
-        $('.simpleCarousel.two').simpleCarousel({
+        $('.two').simpleCarousel({
           width:214,
           height:200,
           showItems:3,
           loop:false
         });
         
-        $('.simpleCarousel.three').simpleCarousel({
+        $('.three').simpleCarousel({
           width:320,
           height:100,
           showItems:2,
