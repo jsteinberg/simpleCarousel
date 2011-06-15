@@ -35,10 +35,10 @@ jQuery simpleCarousel Plugin
       var $list = $(this),
           $items = $list.children();
           // Generated elements for the carousel
-      var $container = $('<div class="simpleCarouselContainer">'),
-          $wrapper = $('<div class="simpleCarouselWrapper">'),
-          $nextControl = $('<a href="#" class="simpleCarouselNext">next</a>'),
-          $prevControl = $('<a href="#" class="simpleCarouselPrev">prev</a>');
+      var $container = $('<div>').addClass('simpleCarouselContainer'),
+          $wrapper = $('<div>').addClass('simpleCarouselWrapper'),
+          $nextControl = $('<a>').attr('href', '#').addClass('simpleCarouselNext').text('next'),
+          $prevControl = $('<a>').addClass('simpleCarouselPrev').text('prev');
           // sizes
       var $currentPage = 1,
           $pages = Math.ceil($items.length/settings.showItems);
@@ -54,9 +54,9 @@ jQuery simpleCarousel Plugin
         .addClass(settings.customClass);
       $list.replaceWith($container);
       
-      $wrapper.appendTo($container);
       $nextControl.appendTo($container);
       $prevControl.appendTo($container);
+      $wrapper.appendTo($container);
       
       $wrapper
         .css({
@@ -114,10 +114,10 @@ jQuery simpleCarousel Plugin
         }
       };
 
-      function setControls(page) {
+      function setControls(page) {        
         if(page == $pages) {
           $nextControl.addClass('disabled');
-          $prevControl.removeClass('disabled');
+          $prevControl.addClass('disabled');
         } else if(page == 1) {
           $nextControl.removeClass('disabled');
           $prevControl.addClass('disabled');         
@@ -128,8 +128,8 @@ jQuery simpleCarousel Plugin
       };
 
       function updateControlHref(currentPage) { 
-        var nextPage,
-            prevPage;
+        var nextPage, prevPage;
+            
         if(currentPage == $pages) {
           nextPage = 1;
           prevPage = $currentPage-1;
