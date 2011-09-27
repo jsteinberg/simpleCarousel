@@ -35,10 +35,10 @@ jQuery simpleCarousel Plugin
       var $list = $(this),
           $items = $list.children();
           // Generated elements for the carousel
-      var $container = $('<div>').addClass('simpleCarouselContainer'),
-          $wrapper = $('<div>').addClass('simpleCarouselWrapper'),
-          $nextControl = $('<a>').attr('href', '#').addClass('simpleCarouselNext').text('next'),
-          $prevControl = $('<a>').addClass('simpleCarouselPrev').text('prev');
+      var $container = $('<div class="simpleCarouselContainer">'),
+          $wrapper = $('<div class="simpleCarouselWrapper">'),
+          $nextControl = $('<a href="#" class="simpleCarouselNext">next</a>'),
+          $prevControl = $('<a href="#" class="simpleCarouselPrev">prev</a>');
           // sizes
       var $currentPage = 1,
           $pages = Math.ceil($items.length/settings.showItems);
@@ -54,15 +54,18 @@ jQuery simpleCarousel Plugin
         .addClass(settings.customClass);
       $list.replaceWith($container);
       
-      $nextControl.appendTo($container);
-      $prevControl.appendTo($container);
       $wrapper.appendTo($container);
+      if($items.length > settings.showItems) {
+        $nextControl.appendTo($container);
+        $prevControl.appendTo($container);
+      }
       
       $wrapper
         .css({
           'overflow':'hidden',
           height:settings.height,
-          width:settings.width*settings.showItems
+          width:settings.width*settings.showItems,
+          position:'relative'
         })
         .scrollLeft(0);
       $list
@@ -114,10 +117,10 @@ jQuery simpleCarousel Plugin
         }
       };
 
-      function setControls(page) {        
+      function setControls(page) {
         if(page == $pages) {
           $nextControl.addClass('disabled');
-          $prevControl.addClass('disabled');
+          $prevControl.removeClass('disabled');
         } else if(page == 1) {
           $nextControl.removeClass('disabled');
           $prevControl.addClass('disabled');         
@@ -128,8 +131,8 @@ jQuery simpleCarousel Plugin
       };
 
       function updateControlHref(currentPage) { 
-        var nextPage, prevPage;
-            
+        var nextPage,
+            prevPage;
         if(currentPage == $pages) {
           nextPage = 1;
           prevPage = $currentPage-1;
@@ -159,7 +162,7 @@ jQuery simpleCarousel Plugin
         } else {
           setControls(page);
         }
-
+        
         var dir = page < $currentPage ? -1 : 1,
             n = Math.abs($currentPage - page),
             left = settings.width*dir*settings.showItems*n;
@@ -200,7 +203,7 @@ jQuery simpleCarousel Plugin
     width:'auto',
     height:'auto',
     showItems:1,
-    animationSpeed:250,
+    animationSpeed:500,
     loop:false,
     customClass:'simpleCarousel'
   };
